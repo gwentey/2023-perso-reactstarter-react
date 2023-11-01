@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { accountService } from '@/_services/account.service';
 
-import axios from 'axios'
-
 import './auth.css'
 
 const Login = () => {
@@ -24,7 +22,7 @@ const Login = () => {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:7777/auth/login', credentials)
+        accountService.login(credentials)
         .then(res => {
             console.log(res)
             accountService.saveToken(res.data.access_token)
