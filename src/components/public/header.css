@@ -3,17 +3,17 @@ header {
     border-bottom: solid 1px grey;
 }
 
-ul {
+.pheader ul {
     list-style: none;
     padding: 0px;
 }
 
-ul li {
+.pheader ul li {
     display: inline-block;
     margin-right: 20px;
 }
 
-a {
+.pheader ul li a {
     text-decoration: none;
     color: black;
 }
