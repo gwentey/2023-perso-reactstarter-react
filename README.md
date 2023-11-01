@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Pré-requis :
+Installation d'une API Rest : https://github.com/gwentey/2023-perso-api-rest-express
+
 ## Available Scripts
 
 In the project directory, you can run:
