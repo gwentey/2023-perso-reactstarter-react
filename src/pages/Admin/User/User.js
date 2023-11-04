@@ -1,26 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 
 import { userService } from '@/_services/user.service'
 
 const User = () => {
 
-    let navigate = useNavigate()
-    const [users, setUsers] = useState([])
+    // let navigate = useNavigate()
+    // const [users, setUsers] = useState([])
 
-    useEffect(() => {
-        userService.getAllUsers()
-            .then(res => {
-                console.log(res.data.data)
-                setUsers(res.data.data)
-            })
-            .catch(err => console.log(err))
-    }, [])
+    // permet de limiter l'appel à une fois
+    // const flag = useRef(false)
+
+    const {isLoading, data} = useQuery('users', () => userService.getAllUsers())
+    const users = data || {"data": []}
+
+/*     useEffect(() => {
+        if (flag.current === false) {
+            userService.getAllUsers()
+                .then(res => {
+                    console.log(res.data.data)
+                    setUsers(res.data.data)
+                })
+                .catch(err => console.log(err))
+        }
+        // fonction de nettoyage React : permet de limiter l'appel à une fois
+        return () => flag.current = true
+    }, []) */
 
     /*     const marcel = (userId) => {
             navigate("../edit/" + userId);
         }
      */
+
+    if(isLoading){
+        return <div>Loading ...</div>
+    }
     return (
         <div className='User'>
             User Liste
@@ -37,7 +52,7 @@ const User = () => {
                 </thead>
                 <tbody>
                     {
-                        users.map(user => (
+                        users.data.map(user => (
                             <tr key={user.id}>
                                 <td>{user.id}</td>
                                 <td>{user.nom}</td>
