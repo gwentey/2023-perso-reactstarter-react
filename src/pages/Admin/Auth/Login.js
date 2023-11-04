@@ -9,7 +9,7 @@ const Login = () => {
     let navigate = useNavigate();
     const [credentials, setCredentials] = useState({
         email: 'anthony@gmail.com',
-        password: 'Emmanini6363!'
+        password: 'E!'
     })
 
     const onChange = (e) => {
