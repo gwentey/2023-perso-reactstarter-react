@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
-
-import { userService } from '@/_services/user.service'
+import { userService } from '@/_services'
 
 const User = () => {
 
     let navigate = useNavigate()
     const [users, setUsers] = useState([])
+    // permet de ne pas avoir un double appel
+    const flag = useRef(flase)
 
     useEffect(() => {
+        // permet de ne pas avoir un double appel
+        if(flag.current === false){
         userService.getAllUsers()
             .then(res => {
                 console.log(res.data.data)
                 setUsers(res.data.data)
             })
             .catch(err => console.log(err))
+        }
+        // fonction de nettoyage permet de ne pas faire de double appel
+        return () => flag.current = true
     }, [])
+    
 
     /*     const marcel = (userId) => {
             navigate("../edit/" + userId);
